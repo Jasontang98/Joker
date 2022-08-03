@@ -14,6 +14,8 @@ const CreateJoke = () => {
         setImage(file);
     }
 
+    // const reset =
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
