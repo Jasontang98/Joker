@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from app.models import Joke, db
 from app.config import Config
 from app.aws_s3 import *
-from app.forms.joke_form import JokeForm
+from app.forms.post_joke_form import JokeForm
 
 joke_routes = Blueprint('jokes', __name__)
 
@@ -27,26 +27,30 @@ def get_single_joke(id):
         return 'Joke not found'
 
 
-# Post a queet
+# Post a joke
 @joke_routes.route('/post', methods=['POST'])
 # @login_required
 def post_joke():
-    file = request.files["image_url"]
+    form = JokeForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        file = request.files["image_url"]
+        if file:
+            file_url = upload_file_to_s3(file, Config.S3_BUCKET)
+            new_joke = Joke(
+                user_id=form.user_id.data,
+                content=form.content.data,
+                image_url=file_url,
+                created_at=datetime.now(),
+                updated_at=datetime.now()
+            )
+            db.session.add(new_joke)
+            db.session.commit()
+            return new_joke.to_dict()
+        else:
+            return 'No File Attached!'
 
-    if file:
-        file_url = upload_file_to_s3(file, Config.S3_BUCKET)
-        # create an instance of <Your_Model>
-
-        # data = request.json
-        new_joke = Joke(
-            user_id=current_user.id,
-            content=request.form.get('content'),
-            image_url=file_url,
-            created_at=datetime.now(),
-            updated_at=datetime.now()
-        )
-        db.session.add(new_joke)
-        db.session.commit()
-        return new_joke.to_dict()
-    else:
-        return 'No File Attached!'
+# Edit a joke
+# @joke_routes.route('/edit/<int:id>', methods=['PUT'])
+# # @login_required
+# def

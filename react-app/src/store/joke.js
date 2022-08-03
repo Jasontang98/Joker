@@ -55,7 +55,6 @@ export const getSingleJoke = (id) => async (dispatch) => {
 // Post A Joke
 export const createJoke = (joke) => async(dispatch) => {
     const {user_id, content, image_url} = joke;
-
     const form = new FormData();
 
     form.append("user_id", user_id);
@@ -73,3 +72,31 @@ export const createJoke = (joke) => async(dispatch) => {
         return data
     }
 }
+
+// Reducer
+
+const initialState = {};
+
+const jokeReducer = (state = initialState, action) => {
+    let newState;
+    switch (action.type) {
+        case GET_JOKES:
+            const jokes = action.jokes;
+            console.log(action)
+            newState = { ...state }
+            jokes.forEach((joke) => {
+                newState[joke.id] = joke;
+            })
+            return newState;
+            // const jokes = action.jokes;
+            // return jokes
+        case GET_JOKE:
+            return { ...state, [action.joke.id]: action.joke}
+        case ADD_JOKE:
+            return { ...state, [action.joke.id]: action.joke}
+        default:
+            return state;
+    }
+}
+
+export default jokeReducer;

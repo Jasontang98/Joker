@@ -18,9 +18,10 @@ class Joke(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "user_id": self.user,
+            "user_id": self.user_id,
             "content": self.content,
             "image_url": self.image_url,
             "created_at": self.created_at,
-            "updated_at": self.updated_at
+            "updated_at": self.updated_at,
+            'userinfo': self.users.to_dict(),
         }
