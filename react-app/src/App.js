@@ -9,6 +9,8 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 
+import CreateJoke from './components/Timeline/Jokes/CreateJokes'
+
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -36,6 +38,9 @@ function App() {
         </Route>
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
+        </ProtectedRoute>
+        <ProtectedRoute path='/jokes/post' exact={true} >
+          <CreateJoke />
         </ProtectedRoute>
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />

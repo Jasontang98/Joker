@@ -1,4 +1,3 @@
-from email.mime import image
 from .db import db
 
 class Comment(db.Model):

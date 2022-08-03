@@ -1,6 +1,4 @@
-from email.mime import image
 from datetime import datetime
-from turtle import back
 from .db import db
 
 class Joke(db.Model):

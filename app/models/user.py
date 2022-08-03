@@ -1,5 +1,3 @@
-from turtle import back
-
 from app.models import comment
 from .db import db
 from werkzeug.security import generate_password_hash, check_password_hash
