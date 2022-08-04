@@ -1,11 +1,10 @@
-from crypt import methods
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Joke, db
+from app.models import Joke, Comment, comment, db
 from app.config import Config
 from app.aws_s3 import *
-from app.forms.edit_joke_form import EditJokeForm
-from app.forms.post_joke_form import PostJokeForm
+from app.forms.joke_form import PostJokeForm, EditJokeForm
+from app.forms.comment_form import PostCommentForm, EditCommentForm
 from datetime import datetime
 
 joke_routes = Blueprint('jokes', __name__)
@@ -53,6 +52,7 @@ def post_joke():
         else:
             return 'No File Attached!'
 
+
 # Edit a joke
 @joke_routes.route('/edit/<int:id>', methods=['PUT'])
 # @login_required
@@ -65,6 +65,7 @@ def edit_joke(id):
         db.session.commit()
         return joke.to_dict()
 
+
 # Delete a joke
 @joke_routes.route('/delete/<int:id>', methods=['DELETE'])
 # @login_required
@@ -74,3 +75,67 @@ def delete_joke(id):
     db.session.delete(joke)
     db.session.commit()
     return old_joke
+
+
+# Routes to get all Comments
+@joke_routes.route('/<int:id>/comments')
+# @login_required
+def all_comments(id):
+    comments = Comment.query.filter_by(joke_id=id).all()
+    data = [comment.to_dict() for comment in comments]
+    return {"comments": data}
+
+
+# Routes to get single Comment
+@joke_routes.route('/<int:id>/comments/<int:comment_id>')
+# @login_required
+def get_single_comment(id, comment_id):
+    comment = Comment.query.get(comment_id)
+    return comment.to_dict()
+
+
+# Post a Comment
+@joke_routes.route('/<int:id>', methods=['POST'])
+# @login_required
+def post_comment(id):
+    form = PostCommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        comment = Comment(
+            user_id=form.user_id.data,
+            joke_id=form.joke_id.data,
+            content=form.content.data,
+            created_at=datetime.now(),
+            updated_at=datetime.now()
+        )
+        db.session.add(comment)
+        db.session.commit()
+        return comment.to_dict()
+    else:
+        return 'No File Attached!'
+
+
+# Edit a Comment
+@joke_routes.route('/<int:id>/comments/<int:comment_id>', methods=['PUT'])
+# @login_required
+def edit_comment(id, comment_id):
+    comment = Comment.query.get(comment_id)
+    form = EditCommentForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        comment.content=form.content.data,
+        comment.created_at=datetime.now(),
+        comment.updated_at=datetime.now()
+        db.session.add(comment)
+        db.session.commit()
+        return comment.to_dict()
+
+
+# Delete a Comment
+@joke_routes.route('/<int:id>/comments/<int:comment_id>', methods=['DELETE'])
+# @login_required
+def delete_comment(id, comment_id):
+    comment = Comment.query.get(comment_id)
+    db.session.delete(comment)
+    db.session.commit()
+    return comment.to_dict()

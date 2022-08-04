@@ -21,7 +21,7 @@ class Comment(db.Model):
             "id": self.id,
             "user_id": self.user_id,
             "joke_id": self.joke_id,
-            "joke": self.jokes.to_dict(),
+            # "joke": self.jokes.to_dict(),
             "content": self.content,
             "image_url": self.image_url,
             "created_at": self.created_at,

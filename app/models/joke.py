@@ -23,5 +23,6 @@ class Joke(db.Model):
             "image_url": self.image_url,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
-            'userinfo': self.users.to_dict(),
+            'user_info': self.users.to_dict(),
+            'comment_length': len(self.comments)
         }
