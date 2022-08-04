@@ -1,10 +1,12 @@
-from datetime import datetime
+from crypt import methods
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Joke, db
 from app.config import Config
 from app.aws_s3 import *
-from app.forms.post_joke_form import JokeForm
+from app.forms.edit_joke_form import EditJokeForm
+from app.forms.post_joke_form import PostJokeForm
+from datetime import datetime
 
 joke_routes = Blueprint('jokes', __name__)
 
@@ -13,7 +15,8 @@ joke_routes = Blueprint('jokes', __name__)
 @joke_routes.route('/')
 def all_jokes():
     jokes = Joke.query.all()
-    return {joke.id: joke.to_dict() for joke in jokes}
+    data = [joke.to_dict() for joke in jokes]
+    return {"joke": data}
 
 
 # Get single joke
@@ -31,7 +34,7 @@ def get_single_joke(id):
 @joke_routes.route('/post', methods=['POST'])
 # @login_required
 def post_joke():
-    form = JokeForm()
+    form = PostJokeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         file = request.files["image_url"]
@@ -51,6 +54,23 @@ def post_joke():
             return 'No File Attached!'
 
 # Edit a joke
-# @joke_routes.route('/edit/<int:id>', methods=['PUT'])
-# # @login_required
-# def
+@joke_routes.route('/edit/<int:id>', methods=['PUT'])
+# @login_required
+def edit_joke(id):
+    form = EditJokeForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        joke = Joke.query.get(id)
+        joke.content = form.content.data
+        db.session.commit()
+        return joke.to_dict()
+
+# Delete a joke
+@joke_routes.route('/delete/<int:id>', methods=['DELETE'])
+# @login_required
+def delete_joke(id):
+    joke = Joke.query.get(id)
+    old_joke = joke.to_dict()
+    db.session.delete(joke)
+    db.session.commit()
+    return old_joke

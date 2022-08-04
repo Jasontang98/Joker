@@ -1,3 +1,4 @@
 from .login_form import LoginForm
 from .signup_form import SignUpForm
-from .post_joke_form import JokeForm
+from .post_joke_form import PostJokeForm
+from .edit_joke_form import EditJokeForm
