@@ -19,7 +19,9 @@ const Jokes = () => {
                     return (
                         <div key={joke.id}>
                             <div>
+                                <navLink to={`/jokes/${joke.id}`}>
                                 {joke.content}
+                                </navLink>
                             </div>
                             <div>
                                 <img
