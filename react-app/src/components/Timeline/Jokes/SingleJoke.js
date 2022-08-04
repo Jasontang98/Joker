@@ -11,7 +11,7 @@ const SingleJoke = () => {
     const { id } = useParams();
     const history = useHistory();
 
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);1
     // const [content, setContent] = useState('');
     // const [image, setImage] = useState(null);
 
