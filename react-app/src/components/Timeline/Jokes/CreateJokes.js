@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { createJoke } from '../../../store/joke';
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from 'react-router-dom';
 
 const CreateJoke = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const user = useSelector(state => state.session.user);
 
     const [content, setContent] = useState('');
@@ -26,6 +28,7 @@ const CreateJoke = () => {
         }
 
         dispatch(createJoke(data))
+        history.push('/jokes')
     }
 
     return (
@@ -35,7 +38,7 @@ const CreateJoke = () => {
                     type="text"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    placeholder="JOKER"
+                    placeholder="Add a joke"
                 />
                 <input
                     type="file"

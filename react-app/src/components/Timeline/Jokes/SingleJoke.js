@@ -12,7 +12,7 @@ const SingleJoke = () => {
     const history = useHistory();
 
     const [isLoaded, setIsLoaded] = useState(false);
-    const [content, setContent] = useState('');
+    // const [content, setContent] = useState('');
     // const [image, setImage] = useState(null);
 
     const oneJoke = useSelector((state) => state.jokes[id]);
@@ -51,7 +51,7 @@ const SingleJoke = () => {
                 <div>
                     <img
                         src={oneJoke?.image_url}
-                        alt="joke image"
+                        alt="joke"
                         className='singleimage'
                     />
                 </div>

@@ -2,6 +2,7 @@ import React from 'react'
 import { getAllJokes } from '../../../store/joke';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import { NavLink } from 'react-router-dom';
 
 const Jokes = () => {
     const dispatch = useDispatch();
@@ -19,14 +20,14 @@ const Jokes = () => {
                     return (
                         <div key={joke.id}>
                             <div>
-                                <navLink to={`/jokes/${joke.id}`}>
+                                <NavLink to={`/jokes/${joke.id}`}>
                                 {joke.content}
-                                </navLink>
+                                </NavLink>
                             </div>
                             <div>
                                 <img
                                     src={joke?.image_url}
-                                    alt="joke image"
+                                    alt="joke"
                                     className='singleimage'
                                 />
                             </div>
