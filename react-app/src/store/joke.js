@@ -31,7 +31,6 @@ const deleteJoke = (joke) => ({
 
 // Get All Jokes
 export const getAllJokes = () => async (dispatch) => {
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     const response = await fetch('/api/jokes/');
 
     if (response.ok) {

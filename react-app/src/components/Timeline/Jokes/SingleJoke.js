@@ -40,10 +40,10 @@ const SingleJoke = () => {
         isLoaded && (
             <>
                 <div>
-                    {oneJoke.userinfo.display_name}
+                    {oneJoke.user_info.display_name}
                 </div>
                 <div>
-                    {oneJoke.userinfo.username}
+                    {oneJoke.user_info.username}
                 </div>
                 <div>
                     {oneJoke.content}
