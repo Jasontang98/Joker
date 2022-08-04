@@ -101,18 +101,22 @@ def post_comment(id):
     form = PostCommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        comment = Comment(
-            user_id=form.user_id.data,
-            joke_id=form.joke_id.data,
-            content=form.content.data,
-            created_at=datetime.now(),
-            updated_at=datetime.now()
-        )
-        db.session.add(comment)
-        db.session.commit()
-        return comment.to_dict()
-    else:
-        return 'No File Attached!'
+        file = request.files["image_url"]
+        if file:
+            file_url = upload_file_to_s3(file, Config.S3_BUCKET)
+            comment = Comment(
+                user_id=form.user_id.data,
+                joke_id=form.joke_id.data,
+                content=form.content.data,
+                image_url=file_url,
+                created_at=datetime.now(),
+                updated_at=datetime.now()
+            )
+            db.session.add(comment)
+            db.session.commit()
+            return comment.to_dict()
+        else:
+            return 'No File Attached!'
 
 
 # Edit a Comment
