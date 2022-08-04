@@ -8,8 +8,9 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
-
+import Jokes from './components/Timeline/Jokes/Jokes'
 import CreateJoke from './components/Timeline/Jokes/CreateJokes'
+import SingleJoke from './components/Timeline/Jokes/SingleJoke';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -39,9 +40,18 @@ function App() {
         <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
         </ProtectedRoute>
+
+        <ProtectedRoute path='/jokes' exact={true} >
+          <Jokes />
+        </ProtectedRoute>
         <ProtectedRoute path='/jokes/post' exact={true} >
           <CreateJoke />
         </ProtectedRoute>
+
+        <ProtectedRoute path='/jokes/:id' exact={true} >
+          <SingleJoke />
+        </ProtectedRoute>
+
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>

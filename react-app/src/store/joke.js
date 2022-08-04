@@ -24,9 +24,9 @@ const editJoke = (joke) => ({
     joke
 })
 
-const deleteJoke = (id) => ({
+const deleteJoke = (joke) => ({
     type: DELETE_JOKE,
-    id
+    joke
 })
 
 // Get All Jokes
@@ -51,7 +51,6 @@ export const getSingleJoke = (id) => async (dispatch) => {
     }
 }
 
-
 // Post A Joke
 export const createJoke = (joke) => async(dispatch) => {
     const {user_id, content, image_url} = joke;
@@ -73,8 +72,37 @@ export const createJoke = (joke) => async(dispatch) => {
     }
 }
 
-// Reducer
+export const updateJoke = (joke) => async(dispatch) => {
+    const { id, content } = joke;
 
+    const form = new FormData();
+
+    form.append("id", id);
+    form.append("content", content);
+
+    const response = await fetch(`/api/jokes/edit/${id}`, {
+        method: "PUT",
+        body: form
+    })
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(editJoke(data));
+        return data
+    }
+}
+
+export const removeJoke = (joke) => async(dispatch) => {
+    const response = await fetch(`/api/jokes/delete/${joke.id}`, {
+        method: 'DELETE'
+    });
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(deleteJoke(data))
+    }
+}
+
+// Reducer
 const initialState = {};
 
 const jokeReducer = (state = initialState, action) => {
@@ -82,18 +110,21 @@ const jokeReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_JOKES:
             const jokes = action.jokes;
-            console.log(action)
             newState = { ...state }
-            jokes.forEach((joke) => {
+            jokes.joke.forEach((joke) => {
                 newState[joke.id] = joke;
             })
             return newState;
-            // const jokes = action.jokes;
-            // return jokes
         case GET_JOKE:
             return { ...state, [action.joke.id]: action.joke}
         case ADD_JOKE:
             return { ...state, [action.joke.id]: action.joke}
+        case EDIT_JOKE:
+            return { ...state, [action.joke.id]: { ...action.joke } };
+        case DELETE_JOKE:
+            newState = { ...state }
+            delete newState[action.joke.id];
+            return newState
         default:
             return state;
     }
