@@ -72,6 +72,7 @@ export const createJoke = (joke) => async(dispatch) => {
     }
 }
 
+// Update A Joke
 export const updateJoke = (joke) => async(dispatch) => {
     const { id, content } = joke;
 
@@ -92,6 +93,7 @@ export const updateJoke = (joke) => async(dispatch) => {
     }
 }
 
+// Remove A Joke
 export const removeJoke = (joke) => async(dispatch) => {
     const response = await fetch(`/api/jokes/delete/${joke.id}`, {
         method: 'DELETE'
