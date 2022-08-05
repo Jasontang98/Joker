@@ -33,6 +33,7 @@ const SingleJoke = () => {
     // }
 
     const deleteJoke = (e) => {
+        e.preventDefault();
         dispatch(removeJoke(oneJoke));
         history.push('/jokes')
     }
@@ -59,10 +60,11 @@ const SingleJoke = () => {
                     }
                 </div>
                 <EditJokeModal />
-
-                <button onClick={deleteJoke}>
-                    Delete
-                </button>
+                <div>
+                    <button className="jokeDelete" onClick={deleteJoke}>
+                        Delete
+                    </button>
+                </div>
                 <div>
                     <Comments />
                 </div>

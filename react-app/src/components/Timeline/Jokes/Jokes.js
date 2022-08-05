@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { NavLink, useParams } from 'react-router-dom';
 
 const Jokes = () => {
-    // const { } = useParams()
     const dispatch = useDispatch();
     const jokesObject = useSelector((state) => state.jokes);
     const jokes = Object.values(jokesObject)

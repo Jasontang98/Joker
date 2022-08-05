@@ -21,4 +21,5 @@ class PostCommentForm(FlaskForm):
 
 
 class EditCommentForm(FlaskForm):
+    comment_id = IntegerField("Comment ID", validators=[DataRequired()])
     content = StringField("Content", validators=[DataRequired(), Length(max=280)])

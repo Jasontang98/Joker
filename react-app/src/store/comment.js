@@ -1,8 +1,7 @@
 export const GET_COMMENTS = '/GET_COMMENTS';
-// export const GET_COMMENT = '/GET_COMMENT';
 export const ADD_COMMENT = '/ADD_COMMENT';
 export const EDIT_COMMENT = '/EDIT_COMMENT';
-export const DELETE_COMMENT = '/DELETE_JOKE';
+export const DELETE_COMMENT = '/DELETE_COMMENT';
 
 const getComments = (comments) => ({
     type: GET_COMMENTS,
@@ -20,7 +19,7 @@ const editComment = (comment) => ({
 })
 
 const deleteComment = (comment) => ({
-    type: GET_COMMENTS,
+    type: DELETE_COMMENT,
     comment
 })
 
@@ -38,6 +37,7 @@ export const getAllComments = (joke_id) => async (dispatch) => {
 // Post A Comment
 export const createComment = (comment) => async (dispatch) => {
     const { user_id, joke_id, content, image_url } = comment;
+
     const form = new FormData();
 
     form.append("user_id", user_id);
@@ -48,7 +48,7 @@ export const createComment = (comment) => async (dispatch) => {
     const response = await fetch(`/api/jokes/${joke_id}`, {
         method: 'POST',
         body: form
-    })
+    });
 
     if (response.ok) {
         const data = await response.json();
@@ -58,7 +58,42 @@ export const createComment = (comment) => async (dispatch) => {
 }
 
 // Edit A Comment
+export const editAComment = (comment) => async (dispatch) => {
+    const { comment_id, content, joke_id } = comment;
 
+    const form = new FormData();
+
+    form.append("comment_id", comment_id)
+    form.append("joke_id", joke_id);
+    form.append("content", content);
+
+    const response = await fetch(`/api/jokes/${joke_id}/comments/${comment_id}`,
+        {
+            method: "PUT",
+            body: form,
+        });
+
+    if (response.ok) {
+        const data = await response.json();
+        dispatch(editComment(data));
+        return data;
+    }
+}
+
+// Delete A Comment
+export const deleteAComment = (comment) => async (dispatch) => {
+    const { id, comment_id } = comment;
+
+    const response = await fetch(
+        `/api/jokes/${id}/comments/${comment_id}`,
+        {
+            method: "DELETE",
+        }
+    );
+    if (response.ok) {
+        dispatch(deleteComment(comment_id));
+    }
+};
 
 // Reducer
 const initialState = {};
@@ -74,7 +109,13 @@ const commentReducer = (state = initialState, action) => {
             })
             return newState;
         case ADD_COMMENT:
-            return { ...state, [action.comment.id]: action.comment}
+            return { ...state, [action.comment.id]: action.comment };
+        case EDIT_COMMENT:
+            return { ...state, [action.comment.id]: action.comment };
+        case DELETE_COMMENT:
+            newState = { ...state }
+            delete newState[action.comment];
+            return newState
         default:
             return state;
     }

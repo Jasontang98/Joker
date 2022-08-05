@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createComment, getAllComments } from '../../../store/comment';
+import { createComment, getAllComments, deleteAComment } from '../../../store/comment';
+import EditCommentModal from '../Comments/EditComment/EditCommentModal';
 
 
 const Comments = () => {
@@ -18,6 +19,7 @@ const Comments = () => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [content, setContent] = useState('');
     const [image, setImage] = useState(null);
+    const [emptyFile, setEmptyFile] = useState('');
 
     useEffect(() => {
         dispatch(getAllComments(id))
@@ -26,6 +28,7 @@ const Comments = () => {
 
     const updateImage = (e) => {
         const file = e.target.files[0];
+        setEmptyFile(file.name)
         setImage(file);
     }
 
@@ -40,9 +43,21 @@ const Comments = () => {
         }
 
         await dispatch(createComment(data))
-        setContent()
+        setContent('')
+        setEmptyFile('')
+        setImage(null)
     }
 
+    const deleteComment = (e, comment) => {
+        e.preventDefault()
+
+        const data = {
+            id,
+            comment_id: comment.id
+        }
+
+        dispatch(deleteAComment(data)).then(() => dispatch(getAllComments(id)))
+    }
 
     return (
         isLoaded && (
@@ -55,6 +70,7 @@ const Comments = () => {
                             onChange={(e) => setContent(e.target.value)}
                             placeholder='Post your comment.'
                         />
+                        {emptyFile}
                         <input
                             type="file"
                             onChange={updateImage}
@@ -74,9 +90,27 @@ const Comments = () => {
                                     className='singleimage'
                                 />
                             }
+                            <div>
+                                {comment?.user_id === user?.id ? (
+                                    <div>
+                                        <div>
+                                            <EditCommentModal comment={comment}/>
+                                        </div>
+                                        <div>
+                                            <button className="commentDelete" onClick={(e) => {deleteComment(e, comment)}}>
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <></>
+                                )
+                                }
+                            </div>
                         </div>
                     ))}
                 </div>
+
             </div>
         )
     )
