@@ -113,7 +113,7 @@ const jokeReducer = (state = initialState, action) => {
         case GET_JOKES:
             const jokes = action.jokes;
             newState = { ...state }
-            jokes.joke.forEach((joke) => {
+            jokes.jokes.forEach((joke) => {
                 newState[joke.id] = joke;
             })
             return newState;

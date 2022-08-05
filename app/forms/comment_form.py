@@ -15,10 +15,10 @@ from wtforms.validators import ValidationError, Length, DataRequired
 
 
 class PostCommentForm(FlaskForm):
-    user_id = IntegerField("user_id", validators=[DataRequired()])
-    joke_id = IntegerField("joke_id", validators=[DataRequired()])
-    content = StringField("content", validators=[DataRequired(), Length(min=1, max=280)])
+    user_id = IntegerField("User ID", validators=[DataRequired()])
+    joke_id = IntegerField("Joke ID", validators=[DataRequired()])
+    content = StringField("Content", validators=[DataRequired(), Length(max=280, message="Comment must be between 1 and 280.")])
 
 
 class EditCommentForm(FlaskForm):
-    content = StringField("content", validators=[DataRequired(), Length(min=1, max=280)])
+    content = StringField("Content", validators=[DataRequired(), Length(max=280)])

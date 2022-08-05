@@ -2,9 +2,10 @@ import React from 'react'
 import { getAllJokes } from '../../../store/joke';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 const Jokes = () => {
+    // const { } = useParams()
     const dispatch = useDispatch();
     const jokesObject = useSelector((state) => state.jokes);
     const jokes = Object.values(jokesObject)
@@ -25,11 +26,15 @@ const Jokes = () => {
                                 </NavLink>
                             </div>
                             <div>
-                                <img
-                                    src={joke?.image_url}
-                                    alt="joke"
-                                    className='singleimage'
-                                />
+                                {joke.image_url &&
+                                <div>
+                                    <img
+                                        src={joke?.image_url}
+                                        alt="joke"
+                                        className='singleimage'
+                                    />
+                                </div>
+                                }
                             </div>
                         </div>
                     )

@@ -1,10 +1,11 @@
 import React from 'react'
-import { getAllJokes, removeJoke, updateJoke } from '../../../store/joke'
 import { useParams, useHistory } from 'react-router-dom'
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./SingleJoke.css"
 import EditJokeModal from './EditJoke/EditJokeModal'
+import { getAllJokes, removeJoke, updateJoke } from '../../../store/joke'
+import Comments from '../Comments/Comments'
 
 const SingleJoke = () => {
     const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const SingleJoke = () => {
 
     useEffect(() => {
         dispatch(getAllJokes()).then(() => { setIsLoaded(true) })
-    }, [dispatch, id]);
+    }, [dispatch]);
 
     // const handleSubmit = (e) => {
     //     e.preventDefault();
@@ -49,17 +50,22 @@ const SingleJoke = () => {
                     {oneJoke.content}
                 </div>
                 <div>
+                    {oneJoke.image_url &&
                     <img
                         src={oneJoke?.image_url}
                         alt="joke"
                         className='singleimage'
                     />
+                    }
                 </div>
                 <EditJokeModal />
 
                 <button onClick={deleteJoke}>
                     Delete
                 </button>
+                <div>
+                    <Comments />
+                </div>
             </>
         )
     )
