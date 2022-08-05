@@ -53,7 +53,7 @@ const Comments = () => {
                             type="text"
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
-                            placeholder='Post a comment.'
+                            placeholder='Post your comment.'
                         />
                         <input
                             type="file"
