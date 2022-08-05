@@ -16,7 +16,7 @@ const CreateJoke = () => {
         setImage(file);
     }
 
-    // const reset =
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -38,12 +38,12 @@ const CreateJoke = () => {
                     type="text"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    placeholder="Add a joke"
+                    placeholder="Add a joke."
                 />
                 <input
                     type="file"
                     onChange={updateImage}
-                    accept=".jpg, .jpeg, .png"
+                    accept=".jpg, .jpeg, .png, .gif"
                 />
                 <button
                     type='submit'>
