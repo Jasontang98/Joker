@@ -43,4 +43,4 @@ const Jokes = () => {
     )
 }
 
-export default Jokes
+export default Jokes;

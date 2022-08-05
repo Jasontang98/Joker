@@ -32,9 +32,9 @@ const SingleJoke = () => {
     //     dispatch(updateJoke(data))
     // }
 
-    const deleteJoke = (e) => {
+    const deleteJoke = async (e) => {
         e.preventDefault();
-        dispatch(removeJoke(oneJoke));
+        await dispatch(removeJoke(oneJoke));
         history.push('/jokes')
     }
 
@@ -42,16 +42,16 @@ const SingleJoke = () => {
         isLoaded && (
             <>
                 <div>
-                    {oneJoke.user_info.display_name}
+                    {oneJoke?.user_info.display_name}
                 </div>
                 <div>
-                    {oneJoke.user_info.username}
+                    {oneJoke?.user_info.username}
                 </div>
                 <div>
-                    {oneJoke.content}
+                    {oneJoke?.content}
                 </div>
                 <div>
-                    {oneJoke.image_url &&
+                    {oneJoke?.image_url &&
                     <img
                         src={oneJoke?.image_url}
                         alt="joke"
