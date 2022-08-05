@@ -15,7 +15,7 @@ joke_routes = Blueprint('jokes', __name__)
 def all_jokes():
     jokes = Joke.query.all()
     data = [joke.to_dict() for joke in jokes]
-    return {"joke": data}
+    return {"jokes": data}
 
 
 # Get single joke
@@ -83,7 +83,7 @@ def delete_joke(id):
 def all_comments(id):
     comments = Comment.query.filter_by(joke_id=id).all()
     data = [comment.to_dict() for comment in comments]
-    return {"comments": data}
+    return {'comments': data}
 
 
 # Routes to get single Comment
