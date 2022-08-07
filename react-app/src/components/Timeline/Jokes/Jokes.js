@@ -3,6 +3,7 @@ import { getAllJokes } from '../../../store/joke';
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { NavLink, useParams } from 'react-router-dom';
+import CreateJoke from './CreateJokes'
 
 const Jokes = () => {
     const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const Jokes = () => {
     return (
         <>
             <div>
+                <CreateJoke />
                 {jokes.map((joke) => {
                     return (
                         <div key={joke.id}>
