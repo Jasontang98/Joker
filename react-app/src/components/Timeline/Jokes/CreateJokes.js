@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { createJoke } from '../../../store/joke';
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from 'react-router-dom';
+import './CreateJokes.css'
 
 const CreateJoke = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
     const user = useSelector(state => state.session.user);
 
     const [content, setContent] = useState('');
     const [image, setImage] = useState(null);
+
+    const reset = () => setContent('');
+
+    const removeImage = () => setImage(null);
 
     const updateImage = (e) => {
         const file = e.target.files[0];
@@ -25,13 +28,18 @@ const CreateJoke = () => {
             image_url: image
         }
 
-        dispatch(createJoke(data))
-        history.push('/jokes')
+        const joke = await dispatch(createJoke(data))
+
+        if (joke) {
+            reset();
+            removeImage();
+        }
     }
 
     return (
         <div>
             <form onSubmit={handleSubmit}>
+                <img className="feedProfPic" src={user.prof_pic_url === '' ? 'https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png' : user.prof_pic_url} alt=''></img>
                 <textarea
                     type="text"
                     value={content}
@@ -43,9 +51,14 @@ const CreateJoke = () => {
                     onChange={updateImage}
                     accept=".jpg, .jpeg, .png, .gif"
                 />
+                <div>
+                    <span>{content.length}</span>
+                    <p>/280</p>
+                </div>
                 <button
+                    disabled={(!content && !image) || content.length > 280}
                     type='submit'>
-                    submit
+                    Submit
                 </button>
             </form>
         </div>

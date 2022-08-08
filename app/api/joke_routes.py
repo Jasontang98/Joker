@@ -36,22 +36,23 @@ def post_joke():
     form = PostJokeForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        file = request.files["image_url"]
-        if file:
-            file_url = upload_file_to_s3(file, Config.S3_BUCKET)
-            new_joke = Joke(
-                user_id=form.user_id.data,
-                content=form.content.data,
-                image_url=file_url,
-                created_at=datetime.now(),
-                updated_at=datetime.now()
-            )
-            db.session.add(new_joke)
-            db.session.commit()
-            return new_joke.to_dict()
+        if "image_url" in request.files:
+            image_url = request.files["image_url"]
+            image_url = upload_file_to_s3(image_url, Config.S3_BUCKET)
         else:
-            return 'No File Attached!'
-
+            image_url = None
+        new_joke = Joke(
+            user_id=form.user_id.data,
+            content=form.content.data,
+            image_url=image_url,
+            created_at=datetime.now(),
+            updated_at=datetime.now()
+        )
+        db.session.add(new_joke)
+        db.session.commit()
+        return new_joke.to_dict()
+    else:
+        return 'No File Attached!'
 
 # Edit a joke
 @joke_routes.route('/edit/<int:id>', methods=['PUT'])
@@ -101,22 +102,24 @@ def post_comment(id):
     form = PostCommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        file = request.files["image_url"]
-        if file:
-            file_url = upload_file_to_s3(file, Config.S3_BUCKET)
-            comment = Comment(
-                user_id=form.user_id.data,
-                joke_id=form.joke_id.data,
-                content=form.content.data,
-                image_url=file_url,
-                created_at=datetime.now(),
-                updated_at=datetime.now()
-            )
-            db.session.add(comment)
-            db.session.commit()
-            return comment.to_dict()
+        if "image_url" in request.files:
+            image_url = request.files["image_url"]
+            image_url = upload_file_to_s3(image_url, Config.S3_BUCKET)
         else:
-            return 'No File Attached!'
+            image_url = None
+        comment = Comment(
+            user_id=form.user_id.data,
+            joke_id=form.joke_id.data,
+            content=form.content.data,
+            image_url=image_url,
+            created_at=datetime.now(),
+            updated_at=datetime.now()
+        )
+        db.session.add(comment)
+        db.session.commit()
+        return comment.to_dict()
+    else:
+        return 'No File Attached!'
 
 
 # Edit a Comment
