@@ -10,13 +10,14 @@ const SplashPage = () => {
     const user = useSelector(state => state.session.user)
 
     if (user) {
-        return (<Redirect top="/" />)
+        return <Redirect to="/jokes" />
     }
 
     return (
         <div className='SplashWholePage'>
             <div className='SplashNoFoot'>
                 <div className='SplashLeft'>
+                    <img className='splash-image' src='https://shotfotos.com/wp-content/uploads/2020/03/Laughing_tears_emojis400.jpg' alt='laughing'/>
                 </div>
                 <div className='SplashRight'>
                     <h1>Joking now</h1>

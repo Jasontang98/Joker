@@ -74,9 +74,13 @@ const Comments = () => {
                         <input
                             type="file"
                             onChange={updateImage}
-                            accept=".jpg, .jpeg, .png"
+                            accept=".jpg, .jpeg, .png, gif"
                         />
-                        <button type='submit'>Submit</button>
+                        <button disabled={(!content && !image) || content.length > 280} type='submit'>Submit</button>
+                        <div>
+                            <span>{content.length}</span>
+                            <p>/280</p>
+                        </div>
                     </form>
                 </div>
                 <div>
@@ -94,10 +98,10 @@ const Comments = () => {
                                 {comment?.user_id === user?.id ? (
                                     <div>
                                         <div>
-                                            <EditCommentModal comment={comment}/>
+                                            <EditCommentModal comment={comment} />
                                         </div>
                                         <div>
-                                            <button className="commentDelete" onClick={(e) => {deleteComment(e, comment)}}>
+                                            <button className="commentDelete" onClick={(e) => { deleteComment(e, comment) }}>
                                                 Delete
                                             </button>
                                         </div>

@@ -1,17 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
-import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
+
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
+// import UsersList from './components/UsersList';
 import User from './components/User';
 import Splash from './components/Splash/SplashPage'
 import { authenticate } from './store/session';
-import Jokes from './components/Timeline/Jokes/Jokes'
-import CreateJoke from './components/Timeline/Jokes/CreateJokes'
-import SingleJoke from './components/Timeline/Jokes/SingleJoke';
+import TimelineAllJokes from './components/Timeline/TimelineAllJokes';
+import TimelineSingleJoke from './components/Timeline/TimelineSingleJoke';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -30,27 +27,30 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      {/* <NavBar /> */}
       <Switch>
         <Route path='/login' exact={true}>
           <Splash />
         </Route>
         <Route path='/sign-up' exact={true}>
-          <SignUpForm />
+          <Splash />
         </Route>
-        <ProtectedRoute path='/users' exact={true} >
+        {/* <ProtectedRoute path='/users' exact={true} >
           <UsersList/>
+        </ProtectedRoute> */}
+         <ProtectedRoute path='/' exact={true} >
+          <Splash />
         </ProtectedRoute>
 
         <ProtectedRoute path='/jokes' exact={true} >
-          <Jokes />
+          <TimelineAllJokes />
         </ProtectedRoute>
-        <ProtectedRoute path='/jokes/post' exact={true} >
+        {/* <ProtectedRoute path='/jokes/post' exact={true} >
           <CreateJoke />
-        </ProtectedRoute>
+        </ProtectedRoute> */}
 
         <ProtectedRoute path='/jokes/:id' exact={true} >
-          <SingleJoke />
+          <TimelineSingleJoke />
         </ProtectedRoute>
 
         <ProtectedRoute path='/users/:userId' exact={true} >

@@ -9,8 +9,8 @@ from wtforms.validators import ValidationError, Length, DataRequired
 
 class PostJokeForm(FlaskForm):
     user_id = IntegerField("User ID", validators=[DataRequired()])
-    content = StringField("Content", validators=[DataRequired(), Length(max=280, message="Joke must be between 1 and 280.")])
+    content = StringField("Content", validators=[Length(max=280, message="Joke must be between 1 and 280.")])
 
 class EditJokeForm(FlaskForm):
     # user_id = IntegerField("user_id", validators=[DataRequired()])
-    content = StringField("Content", validators=[DataRequired(), Length(max=280)])
+    content = StringField("Content", validators=[Length(max=280)])

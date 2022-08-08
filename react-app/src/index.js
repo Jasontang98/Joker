@@ -5,6 +5,11 @@ import { ModalProvider } from './context/Modal'
 import './index.css';
 import App from './App';
 import configureStore from './store';
+import TimeAgo from 'javascript-time-ago';
+
+import en from 'javascript-time-ago/locale/en.json'
+
+TimeAgo.addDefaultLocale(en)
 
 const store = configureStore();
 

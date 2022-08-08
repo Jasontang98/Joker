@@ -42,10 +42,13 @@ const SingleJoke = () => {
         isLoaded && (
             <>
                 <div>
-                    {oneJoke?.user_info.display_name}
+                    {oneJoke?.user_info.username}
                 </div>
                 <div>
-                    {oneJoke?.user_info.username}
+                    @{oneJoke?.user_info.display_name}
+                </div>
+                <div>
+                    <img className="feedProfPic" src={oneJoke?.user_info.prof_pic_url === '' ? 'https://twirpz.files.wordpress.com/2015/06/twitter-avi-gender-balanced-figure.png' : oneJoke?.user_info.prof_pic_url} alt=''></img>
                 </div>
                 <div>
                     {oneJoke?.content}

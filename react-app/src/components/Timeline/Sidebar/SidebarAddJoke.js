@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { createJoke } from '../../../store/joke';
 import { useDispatch, useSelector } from "react-redux";
-import './CreateJokes.css'
+import { createJoke } from "../../../store/joke";
+import './SidebarAddJoke.css';
 
-const CreateJoke = () => {
+const SidebarAddJoke = ({ setShowModal }) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user);
 
@@ -11,8 +11,6 @@ const CreateJoke = () => {
     const [image, setImage] = useState(null);
 
     const reset = () => setContent('');
-
-    const removeImage = () => setImage(null);
 
     const updateImage = (e) => {
         const file = e.target.files[0];
@@ -32,7 +30,7 @@ const CreateJoke = () => {
 
         if (joke) {
             reset();
-            removeImage();
+            setShowModal(false);
         }
     }
 
@@ -44,7 +42,7 @@ const CreateJoke = () => {
                     type="text"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    placeholder="Add a joke"
+                    placeholder="Add a joke."
                 />
                 <input
                     type="file"
@@ -58,11 +56,11 @@ const CreateJoke = () => {
                 <button
                     disabled={(!content && !image) || content.length > 280}
                     type='submit'>
-                    Submit
+                    Joke
                 </button>
             </form>
         </div>
     )
 }
 
-export default CreateJoke;
+export default SidebarAddJoke;

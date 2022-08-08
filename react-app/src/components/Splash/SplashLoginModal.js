@@ -18,4 +18,4 @@ const SplashLoginModal = () => {
     );
 }
 
-export default SplashLoginModal
+export default SplashLoginModal;

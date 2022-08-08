@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 
-const LoginForm = ({ setShowModal}) => {
+const LoginForm = ({ setShowModal }) => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +27,7 @@ const LoginForm = ({ setShowModal}) => {
   };
 
   if (user) {
-    return <Redirect to='/' />;
+    return <Redirect to='/  ' />;
   }
 
   return (
