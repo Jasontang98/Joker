@@ -7,6 +7,7 @@ import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
+import Splash from './components/Splash/SplashPage'
 import { authenticate } from './store/session';
 import Jokes from './components/Timeline/Jokes/Jokes'
 import CreateJoke from './components/Timeline/Jokes/CreateJokes'
@@ -32,7 +33,7 @@ function App() {
       <NavBar />
       <Switch>
         <Route path='/login' exact={true}>
-          <LoginForm />
+          <Splash />
         </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
