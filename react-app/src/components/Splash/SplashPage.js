@@ -14,31 +14,38 @@ const SplashPage = () => {
     }
 
     return (
-        <div className='SplashWholePage'>
-            <div className='SplashNoFoot'>
-                <div className='SplashLeft'>
-                    <img className='splash-image' src='https://shotfotos.com/wp-content/uploads/2020/03/Laughing_tears_emojis400.jpg' alt='laughing'/>
-                </div>
-                <div className='SplashRight'>
-                    <h1>Joking now</h1>
-                    <p>Join Joker today</p>
-                </div>
-                <div className='SplashSignupContainer'>
-                    <DemoUser />
-                    <div>
-                        <p>or</p>
+        <>
+            <div className='SplashWholePage'>
+                <div className='SplashNoFoot'>
+                    <div className='SplashLeft'>
+                        <img className='SplashImage' src='https://www.wired.com/wp-content/uploads/2016/11/DaveChappelleNetflix-1.jpg' alt='standup' />
                     </div>
-                    <SplashSignupModal />
+                    <div className='SplashRight'>
+                        <div className='SplashIconContainer'>
+                            <img className='SplashIcon' src='https://i.imgur.com/IRQ5Wrh.png' alt="icon"></img>
+                        </div>
+                        <p className='SplashSlogan'>Joking now</p>
+                        <p className='SplashText'>Join Joker today</p>
+                        <div className='SplashSignupContainer'>
+                            <DemoUser />
+                            <div>
+                                <p>or</p>
+                            </div>
+                            <SplashSignupModal />
+                        </div>
+                        <div className='SplashLoginContainer'>
+                            <p>Already have an account?</p>
+                            <SplashLoginModal />
+                        </div>
+                    </div>
                 </div>
-                <div className='SplashLoginContainer'>
-                    <p>Already have an account?</p>
-                    <SplashLoginModal />
+                <div>
+                <footer className='SplashFooter'>
+                    <p>Footer</p>
+                </footer>
                 </div>
             </div>
-            <footer className='SplashFooter'>
-                <p>Footer</p>
-            </footer>
-        </div>
+        </>
     )
 }
 

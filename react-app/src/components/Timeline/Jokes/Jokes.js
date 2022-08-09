@@ -30,7 +30,7 @@ const Jokes = () => {
                                         className="timestamp"
                                         date={joke.created_at}
                                         locale='en-US'
-                                        timeStyle="twitter-minute-now"
+                                        timestyle="twitter-minute-now"
                                     />
                                 </div>
                                 <NavLink to={`/jokes/${joke.id}`}>

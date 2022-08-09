@@ -1,0 +1,62 @@
+.SplashWholePage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Lucida Sans Unicode';
+    height: 100%;
+    width: 100%;
+    background-color: #0c0c0c;
+}
+
+.SplashNoFoot {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.SplashFooter {
+    /* margin-top: 30px; */
+    border: green solid 1px;
+}
+
+.SplashImage {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.SplashLeft {
+    width: 1039px;
+    height: 870px;
+}
+
+.SplashRight {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 16px;
+}
+
+.SplashIcon {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.SplashSlogan {
+    font-family: TwitterChirpExtendedHeavy, Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 64px;
+    letter-spacing: -1.2px;
+    line-height: 84px;
+    overflow-wrap: break-word;
+    margin-bottom: 48px;
+    margin-top: 48px;
+    color: white;
+}
+
+.SplashText {
+    color: white;
+    font-family: TwitterChirpExtendedHeavy, Verdana, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
