@@ -5,9 +5,9 @@ import "./Feed.css";
 
 const Feed = () => {
     return (
-        <div>
-            <div>
-                <h2>Home</h2>
+        <div className='TopFeed'>
+            <div className='HeaderFeed'>
+                <h2 className='home'>Home</h2>
             </div>
             <CreateJoke />
             <Jokes />

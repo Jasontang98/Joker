@@ -5,12 +5,12 @@ import './TimelineAllJokes.css';
 
 const TimelineAllJokes = () => {
     return (
-        <div className='timeline-all-wrap'>
-            <div className='timeline-all-left'>
+        <div className='TimelineAllWrap'>
+            <div className='TimelineLeft'>
                 <SideBar />
             </div>
-            <div className='timeline-all-center'>
-                <Feed className='timeline-all-feed' />
+            <div className='TimelineMiddle'>
+                <Feed className='TimelineFeed' />
             </div>
         </div>
     )

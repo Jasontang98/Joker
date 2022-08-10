@@ -1,0 +1,23 @@
+.TimelineAllWrap {
+    display: flex;
+    height: 100%;
+    background-color: gray;
+}
+
+.TimelineLeft {
+    width: 594px;
+    border-right: 1px solid #2f3336;
+}
+
+.TimelineMiddle {
+    overflow-y: scroll;
+    width: 600px;
+    border-right: 1px solid #2f3336;
+    height: 100vh;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+/* .TimelineMiddle::-webkit-scrollbar {
+    display: none;
+} */

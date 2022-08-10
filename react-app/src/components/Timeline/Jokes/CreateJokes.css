@@ -3,3 +3,73 @@
     height: 48px;
     border-radius: 50%;
 }
+
+.AddJokeContainer {
+    display: flex;
+}
+
+.AddJokeForm {
+    display: grid;
+    grid-template-columns: 1fr 9fr;
+}
+
+.AddJokeInput {
+    width: 500px;
+    display: flex;
+    font-size: 20px;
+    outline: none;
+    border: none;
+    height: 75px;
+    background-color: transparent;
+    color: white;
+    resize: none;
+    margin-left: 15px;
+    font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.AddJokeInput::-webkit-scrollbar {
+    display: none;
+}
+
+.AddJokeInput::placeholder {
+    color: white;
+}
+
+.AddJokeImageSubmit{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.AddJokeImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+}
+
+.AddJokeImageLabel {
+    display: flex;
+    align-items: center;
+}
+
+.AddJokeImageIcon {
+    color: #1d9bf0;
+    cursor: pointer;
+    width: 50px;
+    height: 20px;
+}
+
+
+.AddJokeImageInput {
+    display: none;
+}
+
+.ImageName {
+    color: white;
+    font-family: 'Lucida Sans Unicode';
+    margin-left: 5px;
+}

@@ -1,0 +1,10 @@
+.TopFeed {
+    height: 53px;
+    width: 100%;
+}
+
+.home {
+    font-size: 20px;
+    color: white;
+    font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
