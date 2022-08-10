@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import { AiOutlineClose } from 'react-icons/ai';
+import './LoginForm.css';
 
 const LoginForm = ({ setShowModal }) => {
   const [errors, setErrors] = useState([]);
@@ -31,34 +33,48 @@ const LoginForm = ({ setShowModal }) => {
   }
 
   return (
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error, ind) => (
-          <div key={ind}>{error}</div>
-        ))}
+    <div className='LoginWrapper'>
+      <div className='LoginClose'>
+        <div onClick={() => setShowModal(false)} className='LoginCloseButtonContainer'>
+          <AiOutlineClose className='LoginCloseButtonContainer' />
+        </div>
       </div>
-      <div>
-        <label htmlFor='email'>Email</label>
-        <input
-          name='email'
-          type='text'
-          placeholder='Email'
-          value={email}
-          onChange={updateEmail}
-        />
+      <div className='Loginwithoutclose'>
+        <img className='LoginIcon' src='https://i.imgur.com/IRQ5Wrh.png' alt="icon"></img>
+        <p className='LoginText'>Sign in to Joker</p>
+
+        <form onSubmit={onLogin}>
+        <div className='LoginErrorContainer'>
+          {errors.map((error, ind) => (
+            <div className='LoginError' key={ind}>{error}</div>
+          ))}
+        </div>
+          <div className='LoginFieldContainer'>
+            <label htmlFor='email'>Email</label>
+            <input
+              className='LoginInput'
+              name='email'
+              type='text'
+              placeholder='Email'
+              value={email}
+              onChange={updateEmail}
+            />
+          </div>
+          <div className='LoginFieldContainer'>
+            <label htmlFor='password'>Password</label>
+            <input
+              className='LoginInput'
+              name='password'
+              type='password'
+              placeholder='Password'
+              value={password}
+              onChange={updatePassword}
+            />
+          </div>
+        </form>
+          <button onClick={onLogin} className='LoginSubmit' type='submit'>Login</button>
       </div>
-      <div>
-        <label htmlFor='password'>Password</label>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type='submit'>Login</button>
-      </div>
-    </form>
+    </div>
   );
 };
 

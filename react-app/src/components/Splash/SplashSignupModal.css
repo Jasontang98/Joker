@@ -1,0 +1,13 @@
+.SplashSignupButton {
+    width: 300px;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    cursor: pointer;
+    background-color: #1d9bf0;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: 'Lucida Sans Unicode';
+    margin-top: 15px;
+}

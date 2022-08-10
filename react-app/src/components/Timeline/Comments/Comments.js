@@ -7,7 +7,6 @@ import EditCommentModal from '../Comments/EditComment/EditCommentModal';
 
 const Comments = () => {
     const dispatch = useDispatch()
-    const history = useHistory()
 
     const { id } = useParams();
 

@@ -1,3 +1,4 @@
+from datetime import datetime
 from flask import Blueprint, jsonify, session, request
 from app.models import User, db
 from app.forms import LoginForm
@@ -14,7 +15,7 @@ def validation_errors_to_error_messages(validation_errors):
     errorMessages = []
     for field in validation_errors:
         for error in validation_errors[field]:
-            errorMessages.append(f'{field} : {error}')
+            errorMessages.append(f'{error}')
     return errorMessages
 
 
@@ -63,9 +64,16 @@ def sign_up():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User(
+            display_name=form.data['display_name'],
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            header=form.data['header'],
+            bio=form.data['bio'],
+            prof_pic_url=form.data['prof_pic_url'],
+            location=form.data['location'],
+            birthday=form.data['birthday'],
+            joined=datetime.now()
         )
         db.session.add(user)
         db.session.commit()

@@ -14,8 +14,8 @@ const DemoUser = () => {
         return dispatch(sessionActions.login(email, password));
     }
     return (
-        <button onClick={loginDemo}>
-            <p>Sign in as a demo user.</p>
+        <button className="SplashDemoButton" onClick={loginDemo}>
+            <p className="DemoButtonText">Sign in as a demo user</p>
         </button>
     )
 }

@@ -1,0 +1,33 @@
+.LoginWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 600px;
+    height: 650px;
+}
+
+.LoginClose {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.Loginwithoutclose {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.LoginInput {
+    margin-top: 0px;
+    color: white;
+    font-family: TwitterChirp, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: transparent;
+    border: none;
+    margin-left: 8px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    width: 420px;
+    resize: none;
+    outline: none;
+}
