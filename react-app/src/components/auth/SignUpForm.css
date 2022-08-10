@@ -10,7 +10,8 @@
     display: flex;
     flex-direction: column;
     margin-left: 80px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
 }
 
 .SignupError {

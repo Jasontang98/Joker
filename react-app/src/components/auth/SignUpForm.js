@@ -112,6 +112,7 @@ const SignUpForm = ({ setShowModal }) => {
             className='SignupInput'
             type='text'
             name='displayname'
+            placeholder='Displayname'
             onChange={updateDisplayname}
             value={displayName}
             required={true}
@@ -123,6 +124,7 @@ const SignUpForm = ({ setShowModal }) => {
             className='SignupInput'
             type='text'
             name='username'
+            placeholder='Username'
             onChange={updateUsername}
             value={username}
             required={true}
@@ -134,6 +136,7 @@ const SignUpForm = ({ setShowModal }) => {
             className='SignupInput'
             type='text'
             name='email'
+            placeholder='Email'
             onChange={updateEmail}
             value={email}
             required={true}
@@ -145,6 +148,7 @@ const SignUpForm = ({ setShowModal }) => {
             className='SignupInput'
             type='password'
             name='password'
+            placeholder='Password'
             onChange={updatePassword}
             value={password}
             required={true}
@@ -156,6 +160,7 @@ const SignUpForm = ({ setShowModal }) => {
             className='SignupInput'
             type='password'
             name='repeat_password'
+            placeholder='Repeat Password'
             onChange={updateRepeatPassword}
             value={repeatPassword}
             required={true}

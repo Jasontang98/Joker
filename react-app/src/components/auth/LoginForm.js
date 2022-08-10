@@ -36,7 +36,7 @@ const LoginForm = ({ setShowModal }) => {
     <div className='LoginWrapper'>
       <div className='LoginClose'>
         <div onClick={() => setShowModal(false)} className='LoginCloseButtonContainer'>
-          <AiOutlineClose className='LoginCloseButtonContainer' />
+          <AiOutlineClose className='LoginCloseButton' />
         </div>
       </div>
       <div className='Loginwithoutclose'>
@@ -50,7 +50,7 @@ const LoginForm = ({ setShowModal }) => {
           ))}
         </div>
           <div className='LoginFieldContainer'>
-            <label htmlFor='email'>Email</label>
+            <label className='LoginLabel' htmlFor='email'>Email</label>
             <input
               className='LoginInput'
               name='email'
@@ -61,7 +61,7 @@ const LoginForm = ({ setShowModal }) => {
             />
           </div>
           <div className='LoginFieldContainer'>
-            <label htmlFor='password'>Password</label>
+            <label className='LoginLabel' htmlFor='password'>Password</label>
             <input
               className='LoginInput'
               name='password'
@@ -72,7 +72,7 @@ const LoginForm = ({ setShowModal }) => {
             />
           </div>
         </form>
-          <button onClick={onLogin} className='LoginSubmit' type='submit'>Login</button>
+          <button onClick={onLogin} className='LoginSubmit' type='submit'>Sign in</button>
       </div>
     </div>
   );
